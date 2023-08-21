@@ -37,7 +37,7 @@ usersRouter.post("/premium/:uid", async (req, res) => {
       allDocuments[i] = true;
     });
 
-    if (!allDocuments.every((e) => true)) {
+    if (!allDocuments.every((e) => e === true)) {
       return res.json({
         success: "false",
         payload: null,

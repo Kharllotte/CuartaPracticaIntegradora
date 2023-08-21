@@ -1,0 +1,16 @@
+.login-button-github {
+  width: 100%;
+  padding: 10px;
+  margin-top: 16px;
+  background-color: #1e3050;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button-github > i {
+  color: #fff;
+  font-size: 18px;
+}

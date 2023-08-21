@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="/css/user.profile.css" />
+<div class="container">
+  <div class="profile">
+    <div class="profile-image">
+      {{#if user.profile}}
+        <img src="profile-image.jpg" alt="Perfil" />
+      {{else}}
+        <div class="i-profile">
+          <i class="fa-solid fa-user"></i>
+        </div>
+      {{/if}}
+    </div>
+    <div class="profile-info">
+      <h2>{{user.firstName}} {{user.lastName}}</h2>
+      <p>Rol: {{user.role}}</p>
+      <p>Email: {{user.email}}</p>
+    </div>
+  </div>
+  {{#unless isAdmin}}
+  <div class="documents">
+    <div class="document">
+      <i class="fa-solid fa-address-card"></i>
+      <p>Identificación</p>
+      {{#if documents.id}}
+      <i class="fas fa-check"></i>
+      {{else}}
+      <i class="fas fa-times"></i>
+      {{/if}}
+    </div>
+    <div class="document">
+      <i class="fa-solid fa-map-location-dot"></i>
+      <p>Comprobante de Domicilio</p>
+      {{#if documents.address}}
+      <i class="fas fa-check"></i>
+      {{else}}
+      <i class="fas fa-times"></i>
+      {{/if}}
+    </div>
+    <div class="document">
+      <i class="fa-solid fa-file-invoice"></i>
+      <p>Comprobante de Estado de Cuenta</p>
+      {{#if documents.accountStatus}}
+      <i class="fas fa-check"></i>
+      {{else}}
+      <i class="fas fa-times"></i>
+      {{/if}}
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button class="btn open-documents-modal">Subir documentos</button>
+  </div>
+
+  {{! Modal }}
+  <div class="documents-modal-overlay">
+    <div class="documents-modal">
+      <span class="close-documents-modal">&times;</span>
+      <h2 class="text-center">Actualizar Documentos</h2>
+      <form
+        id="form"
+        class="documents-modal-form"
+        action="/api/users/upload/documents"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="documents-modal-input-container">
+          <label for="file1">Identificación</label>
+          <input
+            type="file"
+            class="documents-modal-input"
+            name="id"
+            id="file1"
+            accept=".pdf, .doc, .docx"
+          />
+        </div>
+        <div class="documents-modal-input-container">
+          <label for="file2">Domicilio</label>
+          <input
+            type="file"
+            class="documents-modal-input"
+            name="address"
+            id="file2"
+            accept=".pdf, .doc, .docx"
+          />
+        </div>
+        <div class="documents-modal-input-container">
+          <label for="file3">Estado de cuenta</label>
+          <input
+            type="file"
+            class="documents-modal-input"
+            name="accountStatus"
+            id="file3"
+            accept=".pdf, .doc, .docx"
+          />
+        </div>
+        <button type="submit" class="btn">Subir</button>
+      </form>
+    </div>
+  </div>
+  {{! End modal }}
+  {{/unless}}
+</div>
+<script src="/js/modals/profile.js"></script>

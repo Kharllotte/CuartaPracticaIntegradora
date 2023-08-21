@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/login.css" />
+
+<div class="login-body">
+  <div class="login-container">
+    <div class="login-header">
+      <h1>Iniciar Sesión</h1>
+    </div>
+    <form class="login-form" action="/auth/login" method="post">
+      <input
+        type="text"
+        name="email"
+        placeholder="Correo Electrónico"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Contraseña"
+        required
+      />
+      <button class="login-button" type="submit">Iniciar Sesión</button>
+      {{>github-login}}
+    </form>
+    <p class="login-link">¿No tienes una cuenta?
+      <a href="/auth/signup" class="login-link">Registrarse</a>
+    </p>
+    <div class="reset-password">
+      <a href="/auth/password-reset" class="login-link">¿Olvidaste tu contrasena?</a>
+    </div>
+  </div>
+</div>
+
+<script src="/js/login.js"></script>

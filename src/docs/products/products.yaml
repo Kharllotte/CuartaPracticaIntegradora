@@ -1,0 +1,142 @@
+openapi: "3.1.0"
+info:
+  title: API de Productos
+  version: "1.0"
+paths:
+  /api/products:
+    get:
+      security:
+        - CookieAuth: []
+      summary: Obtiene todos los productos
+      description: Es necesario estar logeado para obtener los resultados.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Lista de productos obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /api/products/add:
+    post:
+      security:
+        - CookieAuth: []
+      summary: Crea un nuevo producto
+      description: Es necesario estar logeado para obtener los resultados y ser usuario Premium o Admin.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Producto creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto por ID
+      description: Es necesario estar logeado para obtener los resultados y ser usuario Premium o Admin
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto que se quiere obtener
+      responses:
+        "200":
+          description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /api/products/update:
+    post:
+      summary: Actualizar el producto
+      description: Es necesario estar logeado para obtener los resultados y ser usuario Premium o Admin
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /api/products/inactive/{pid}:
+    post:
+      summary: Eliminar el producto
+      description: Es necesario estar logeado para obtener los resultados y ser usuario Premium o Admin. Usuario premium solo puede inactivar sus productos.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto que se quiere obtener
+      responses:
+        "200":
+          description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+components:
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: connect.sid
+  security:
+    - CookieAuth: []
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Título del producto
+        productName:
+          type: string
+          description: Título del producto
+        productDescription:
+          type: string
+          description: Descripción del producto
+        productCategory:
+          type: string
+          description: Categoría del producto
+        productCode:
+          type: number
+          description: Codigo del producto
+        productPrice:
+          type: number
+          description: Precio del producto
+        productStock:
+          type: number
+          description: Stock del producto

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "LF1001",
+    "title": "Limpiador facial suave",
+    "description": "Gel limpiador facial suave para todo tipo de piel",
+    "price": 350,
+    "code": 12345,
+    "stock": 50,
+    "category": "Limpieza"
+  },
+  {
+    "id": "CH2002",
+    "title": "Crema hidratante revitalizante",
+    "description": "Crema hidratante con vitaminas y antioxidantes",
+    "price": 550,
+    "code": 67890,
+    "stock": 25,
+    "category": "Cuidado facial"
+  },
+  {
+    "id": "PS3003",
+    "title": "Protector solar SPF 50+",
+    "description": "Protector solar de amplio espectro con alta protección",
+    "price": 420,
+    "code": 54321,
+    "stock": 40,
+    "category": "Protector solar"
+  },
+  {
+    "id": "BM4004",
+    "title": "Base de maquillaje de cobertura media",
+    "description": "Base de maquillaje que iguala el tono de piel y disimula imperfecciones",
+    "price": 680,
+    "code": 98765,
+    "stock": 15,
+    "category": "Maquillaje"
+  },
+  {
+    "id": "MP5005",
+    "title": "Máscara de pestañas voluminizadora",
+    "description": "Máscara de pestañas que da volumen y alarga las pestañas",
+    "price": 280,
+    "code": 13579,
+    "stock": 35,
+    "category": "Maquillaje"
+  },
+  {
+    "id": "LB6006",
+    "title": "Labial de larga duración",
+    "description": "Labial de acabado mate que permanece intacto durante horas",
+    "price": 390,
+    "code": 24680,
+    "stock": 20,
+    "category": "Maquillaje"
+  },
+  {
+    "id": "SF7007",
+    "title": "Sérum facial anti-envejecimiento",
+    "description": "Sérum con colágeno y ácido hialurónico para una piel más firme y suave",
+    "price": 890,
+    "code": 11223,
+    "stock": 10,
+    "category": "Tratamiento facial"
+  },
+  {
+    "id": "EC8008",
+    "title": "Exfoliante corporal de coco",
+    "description": "Exfoliante con partículas de coco para una piel suave y renovada",
+    "price": 450,
+    "code": 33445,
+    "stock": 28,
+    "category": "Cuidado corporal"
+  },
+  {
+    "id": "PF9009",
+    "title": "Perfume floral elegante",
+    "description": "Perfume con notas de flores blancas y toques amaderados",
+    "price": 1250,
+    "code": 55667,
+    "stock": 5,
+    "category": "Fragancias"
+  },
+  {
+    "id": "CN1010",
+    "title": "Crema hidratante para manos y uñas",
+    "description": "Crema enriquecida con aceite de almendras para manos suaves y uñas fuertes",
+    "price": 320,
+    "code": 77889,
+    "stock": 18,
+    "category": "Cuidado corporal"
+  }
+]

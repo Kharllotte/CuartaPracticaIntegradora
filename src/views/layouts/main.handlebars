@@ -1,0 +1,59 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <header>
+      <a class="home" href="/products">
+        {{#if isAdmin}}
+        <h2 class="m-0">{{user.firstName}} {{user.lastName}} ({{user.role}})</h2 style="padding: 0;">
+        {{else}}
+        <h1>Mi Tienda</h1>
+        {{/if}}
+      </a>
+      <div class="btn-header content-buttons">
+        {{#unless isAdmin}}
+        <div id="cart-button" class="cart-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-counter">0</span>
+        </div>
+        <script src="/js/main.js"></script>
+        {{/unless}}
+        {{#if userIsAuthenticated}}
+        <a class="a-profile" href="/user/profile">
+          <i class="fa-solid fa-user"></i>
+        </a>
+        <div class="logout" id="btn-logout">
+          <i class="logout fa-solid fa-right-from-bracket"></i>
+        </div>
+        {{else}}
+        <a href="/auth/login" class="user-login">
+          <i class="fa-solid fa-user"></i>
+        </a>
+        {{/if}}
+        <input id="_idCart" type="hidden" name="" value="{{cart}}">
+      </div>
+    </header>
+    {{#unless isAdmin}}
+    {{>cart}}
+    {{/unless}}
+    <main>
+      {{{body}}}
+    </main>
+  </body>
+  <script>
+    document.addEventListener("click", (e) => {
+      if (e.target.matches(".logout")) {
+        location.href = "/auth/logout";
+      }
+  });
+  </script>
+</html>

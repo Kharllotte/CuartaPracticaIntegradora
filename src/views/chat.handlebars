@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="./css/chat.css" />
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <h2>Bienvenido</h2>
+    <p>Ingrese su correo por favor</p>
+    <input type="text" name="" id="name" />
+    <button id="modalBtn">Enviar</button>
+    <div class="d-none mt-1" id="error">El correo es requerido</div>
+  </div>
+</div>
+
+<div class="d-none" id="container">
+  <div>
+    Usuarios conectados:
+    <ul id="user-connect">
+      <li id="main"></li>
+    </ul>
+  </div>
+  <div id="chat-window">
+    <h5>Chat</h5>
+    <div id="output"></div>
+    <div id="actions"></div>
+  </div>
+  <input type="text" id="message" placeholder="mensaje" />
+  <button id="sendMessage">Enviar</button>
+</div>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="./js/chat.js"></script>

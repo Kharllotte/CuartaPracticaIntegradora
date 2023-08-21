@@ -1,0 +1,289 @@
+openapi: "3.1.0"
+info:
+  title: API Productos y Carrito
+  version: "1.0"
+
+paths:
+  /api/carts:
+    post:
+      security:
+        - CookieAuth: []
+      summary: Crea un nuevo carrito. Los administradores no pueden crear carritos.
+      description: Esta ruta requiere que el usuario esté autenticado (user o premium). No se requiere enviar parametros ni body.
+      tags:
+        - Cart
+      responses:
+        "200":
+          description: Carrito creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+        "401":
+          description: No autorizado
+    get:
+      security:
+        - CookieAuth: []
+      summary: Consultar todos los carritos. Solo los administradores pueden consultar todos los carritos.
+      description: Esta ruta requiere que el usuario esté autenticado (admin). No se requiere enviar parametros ni body.
+      tags:
+        - Cart
+      responses:
+        "200":
+          description: Carrito creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+        "401":
+          description: No autorizado
+  /api/carts/{cid}:
+    security:
+      - CookieAuth: []
+    get:
+      summary: Obtiene un carrito por su ID
+      description: Solo los usuarios con rol user y premium pueden obtener el carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito que se quiere obtener
+      responses:
+        "200":
+          description: Carrito obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+    delete:
+      summary: Elimina un carrito o un producto del carrito por su ID
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del carrito o del producto que se quiere eliminar
+      responses:
+        "200":
+          description: Elemento eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+  /api/carts/{cid}/products/{pid}:
+    post:
+      security:
+        - CookieAuth: []
+      summary: Añade un un nuevo producto al carrito
+      description: Solo los usuarios con rol user y premium pueden añadir productos al carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito al que se quiere agregar el producto
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto que se quiere agregar al carrito
+      responses:
+        "201":
+          description: Carrito creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+    delete:
+      security:
+        - CookieAuth: []
+      summary: Elimina un producto del carrito por su ID
+      description: Solo los usuarios con rol user y premium pueden eliminar el producto de un carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito al que se quiere eliminar el producto
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto que se quiere eliminar del carrito
+      responses:
+        "200":
+          description: Producto eliminado del carrito correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+    put:
+      security:
+        - CookieAuth: []
+      summary: Actualiza la cantidad de un producto en un carrito
+      description: Solo los usuarios con rol user y premium pueden actualizar la cantidad deproductos en el carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito al que pertenece el producto
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del producto que se quiere actualizar en el carrito
+      requestBody:
+        required: true
+        description: Cantidad a actualizar en el producto que existe en el carrito
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Amount"
+      responses:
+        "200":
+          description: Producto actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carrito"
+  /api/carts/{cid}/empty:
+    delete:
+      security:
+        - CookieAuth: []
+      summary: Vacia el carrito, dejandolo sin productos
+      description: Solo los usuarios con rol user y premium pueden vaciar el carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito que se quiere vaciar
+      responses:
+        "201":
+          description: Carrito vaciado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+  /api/carts/{cid}/purchase:
+    post:
+      security:
+        - CookieAuth: []
+      summary: Generar la factura con el producto
+      description: Solo los usuarios con rol user y premium generar factura. El endpoint resta del stock segun la cantidad comprada por el usuario. Envia correo con el ticket y devuelve el ticket. Crea un nuevo carrito para el usuario y, devuelve si es el caso los productos que no fueron posible agregar a la factura por falta de stock
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: ID del carrito que se quiere facturar
+      responses:
+        "201":
+          description: Ticket creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+
+components:
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: connect.sid
+  security:
+    - CookieAuth: []
+  schemas:
+    Amount:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Cantidad a actualizar
+    ProductInCart:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: ID del producto
+        amount:
+          type: number
+          description: Cantidad del producto en la orden
+    Carrito:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del carrito
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductInCart"
+          description: Lista de productos en la orden
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Título del producto
+        productName:
+          type: string
+          description: Título del producto
+        productDescription:
+          type: string
+          description: Descripción del producto
+        productCategory:
+          type: string
+          description: Categoría del producto
+        productCode:
+          type: number
+          description: Codigo del producto
+        productPrice:
+          type: number
+          description: Precio del producto
+        productStock:
+          type: number
+          description: Stock del producto
+
+    Ticket:
+      type: object
+      properties:
+        idCart:
+          type: string
+          description: ID del carrito
+        code:
+          type: string
+          format: date-time
+          description: Fecha de compra del ticket
+        amount:
+          type: string
+          description: Monto del ticket
+        purchaseDateTime:
+          type: string
+          description: Fecha en la que se hizo la factura

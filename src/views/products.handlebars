@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/css/table.css" />
+<style>
+  main {
+    justify-content: initial;
+    align-items: initial;
+    display: inline;
+  }
+</style>
+{{#or isAdmin isPremium}}
+  {{>products.action}}
+  {{>modal.add.product}}
+{{/or}}
+<table>
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Categoría</th>
+      <th>Stock</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+      <tr>
+        <td>{{title}}</td>
+        <td>{{description}}</td>
+        <td>{{price}}</td>
+        <td>{{category}}</td>
+        <td>{{stock}}</td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <a href="/products/{{_id}}" class="see">
+              <i class="fa-solid fa-eye"></i>
+            </a>
+            {{#if ../isAdmin}}
+              <button class="edit" onclick="editProduct('{{_id}}')" id="edit" data-id="{{_id}}">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button onclick="deleteProduct('{{_id}}')" class="trash" id="trash" data-id="{{_id}}">
+                <i class="fa-solid fa-trash"></i>
+              </button>            
+            {{else}}
+              {{#if ../isPremium}}
+                {{#if self}}
+                  <button class="edit" onclick="editProduct('{{_id}}')" id="edit" data-id="{{_id}}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button onclick="deleteProduct('{{_id}}')" class="trash" id="trash" data-id="{{_id}}">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>     
+                {{else}}
+                  <button class="add add-to-cart" id="add" data-id="{{_id}}">
+                    <i class="fa-solid fa-cart-plus add" data-id="{{_id}}"></i>
+                  </button>
+                {{/if}}
+              {{else}}
+                <button class="add add-to-cart" id="add" data-id="{{_id}}">
+                  <i class="fa-solid fa-cart-plus add" data-id="{{_id}}"></i>
+                </button>
+              {{/if}}
+            {{/if}}
+          </div>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{#unless isAdmin}}
+<script src="/js/addCart.js"></script>
+{{>chat}}
+{{/unless}}

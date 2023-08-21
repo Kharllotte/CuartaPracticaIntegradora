@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/signup.css" />
+
+<div class="container">
+  <div class="registration-form">
+    <h2 class="form-title">Registrarse</h2>
+    <form class="form" action="/auth/signup" method="post">
+      <div class="form-group">
+        <input
+          type="text"
+          id="firstName"
+          class="form-input"
+          placeholder="Nombre"
+          name="firstName"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          class="form-input"
+          placeholder="Apellido"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="number"
+          id="age"
+          name="age"
+          class="form-input"
+          placeholder="Edad"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-input"
+          placeholder="Correo electrónico"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-input"
+          placeholder="Contraseña"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          id="confirm-password"
+          class="form-input"
+          placeholder="Confirmar Contraseña"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Registrarse</button>
+      {{>github-login}}
+    </form>
+    <p class="login-link">¿Ya tienes una cuenta?
+      <a href="/auth/login" class="login-link">Iniciar sesión</a>
+    </p>
+  </div>
+</div>
+
+<script src="/js/signup.js"></script>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/chat-general.css" />
+<div class="chat-icon">
+  <div class="chat-icon-text">
+    Chat General
+    <span class="userCount"></span>
+  </div>
+</div>
+<div class="chat-container">
+  <div class="chat-box">
+    <div class="chat-header">
+      Chat General
+      <span class="userCount"></span>
+    </div>
+    <div class="chat-messages">
+      <!-- Aquí se mostrarán los mensajes del chat -->
+    </div>
+    <span id="actions"></span>
+    <div class="message-input">
+      <input
+        type="text"
+        class="message-input-box"
+        placeholder="Escribe un mensaje..."
+        id="message"
+      />
+      <button class="send-button">Enviar</button>
+    </div>
+  </div>
+  <button class="minimize-button">-</button>
+</div>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="/js/chat-general.js"></script>

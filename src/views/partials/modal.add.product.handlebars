@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/modals/add.product.css" />
+<input type="hidden" id="productEdit" name="" value="" />
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModalBtn">&times;</span>
+    <h2><span class="title-action-product">Crear</span> Producto</h2>
+    <form
+      id="productForm"
+      class="product-form"
+      method="post"
+      action="/products/add"
+    >
+      <input type="hidden" name="_id" id="_idProduct" />
+      <input
+        class="input-modal-add"
+        type="text"
+        id="productName"
+        name="productName"
+        placeholder="Producto"
+        required
+      />
+
+      <textarea
+        class="input-modal-add"
+        id="productDescription"
+        name="productDescription"
+        placeholder="Descripcion"
+        required
+      ></textarea>
+
+      <input
+        class="input-modal-add"
+        type="number"
+        id="productPrice"
+        name="productPrice"
+        step="0.01"
+        placeholder="Precio"
+        required
+      />
+
+      <input
+        class="input-modal-add"
+        type="text"
+        id="productCategory"
+        name="productCategory"
+        placeholder="Categoria"
+        required
+      />
+
+      <input
+        class="input-modal-add"
+        type="number"
+        id="productCode"
+        name="productCode"
+        placeholder="Code"
+        required
+      />
+
+      <input
+        class="input-modal-add"
+        type="number"
+        id="productStock"
+        name="productStock"
+        placeholder="Stock"
+        required
+      />
+
+      <button type="submit" class="submit-btn">
+        <span class="title-action-product">Crear</span>
+        Producto</button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/modals/add.product.js"></script>
